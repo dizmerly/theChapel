@@ -1,2 +1,2 @@
-# theChapel
+## The Chapel
 Godot game
