@@ -144,8 +144,11 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 8.0
+"speed": 6.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
+size = Vector2(20, 32)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ws0vm"]
 radius = 7.0
@@ -155,10 +158,17 @@ script = ExtResource("1_4vejd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=695493106]
 sprite_frames = SubResource("SpriteFrames_o6j3l")
-animation = &"jump"
+animation = &"run"
 autoplay = "idle"
-frame = 2
-frame_progress = 0.047073375
+frame_progress = 0.53883904
+
+[node name="SwordHit" type="Area2D" parent="AnimatedSprite2D" unique_id=489117361]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/SwordHit" unique_id=97757300]
+position = Vector2(25, -3)
+shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=407991091]
 shape = SubResource("CapsuleShape2D_ws0vm")
+
+[connection signal="area_entered" from="AnimatedSprite2D/SwordHit" to="." method="_on_sword_hit_area_entered"]
