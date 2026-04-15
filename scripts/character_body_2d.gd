@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 
-const SPEED = 200.0
+const SPEED = 400.0
 const JUMP_VELOCITY = -400.0
+var is_attacking = false 
 @onready var _animated_sprite = $AnimatedSprite2D
 
 
@@ -21,11 +22,12 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("move_left", "move_right")
 	# make sure to flip the sprite here if going left/right
 	if Input.is_action_just_pressed("attack"):
+		is_attacking = true
 		_animated_sprite.play("attack")
-	elif direction != 0:
+	elif direction != 0 and !is_attacking:
 		_animated_sprite.play("run")	
 		_animated_sprite.flip_h = direction < 0
-	else:
+	elif !is_attacking:
 		_animated_sprite.play("idle")
 	
 	if direction:
